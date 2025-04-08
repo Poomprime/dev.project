@@ -5,6 +5,20 @@ function convertToBangkokTime(dateString) {
     return dateString.replace(/(\d{2})(\d{2})(\d{2})/, "$1/$2/20$3");
 }
 
+function showModal(message) {
+    document.getElementById("modalMessage").innerHTML = message;
+    document.getElementById("myModal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+    document.getElementById('roomNumber').value = '';
+
+    let container = document.querySelector('.container');
+    container.classList.remove("shrink");
+    container.classList.add("expand");
+}
+
 function submitRoom() {
     let roomNumber = document.getElementById('roomNumber').value.trim().toUpperCase();
     let pattern = /^[ABC]\d{3}$/;
@@ -20,12 +34,13 @@ function submitRoom() {
         container.classList.add("expand");
         submitBtn.disabled = true;
 
+        // *** ตรวจสอบ URL ตรงนี้ให้ถูกต้อง ***
         fetch("https://script.google.com/macros/s/AKfycbzWflHbJe1-yIrMJ7ZFooe1U56_h9IuYIAmmWxN1x-5nzJe56KJE_eQ_-cZmmB7oJNX2A/exec?room=" + encodeURIComponent(roomNumber))
             .then(response => response.json())
             .then(data => {
                 loadingGif.style.display = "none";
                 submitBtn.disabled = false;
-                container.classList.remove("expand"); 
+                container.classList.remove("expand");
                 container.classList.add("shrink");
 
                 if (data.room) {
@@ -37,9 +52,9 @@ function submitRoom() {
                     resultElement.innerHTML = `
                         ✅ Room: ${roomNumber} <br>
                         ⏭️ Next Deep Clean: ${nextTimeDate} <br>
-                        🧼 Lastest Deep Clean: ${deepCleanDate} <br> 
+                        🧼 Lastest Deep Clean: ${deepCleanDate} <br>
                         ⏭️ Next Filter Air: ${nextFilterAirDate} <br>
-                        🌬️ Lastest Filter Air: ${filterAirDate} 
+                        🌬️ Lastest Filter Air: ${filterAirDate}
                     `;
                     resultElement.style.color = "green";
 
@@ -56,7 +71,7 @@ function submitRoom() {
                 showModal("❌ Please try again.");
                 loadingGif.style.display = "none";
                 submitBtn.disabled = false;
-                container.classList.remove("expand"); 
+                container.classList.remove("expand");
                 container.classList.add("shrink");
             });
 
@@ -65,19 +80,4 @@ function submitRoom() {
         resultElement.style.color = "red";
         showModal("❌ Invalid room format!");
     }
-}
-
-function showModal(message) {
-    document.getElementById("modalMessage").innerHTML = message;
-    document.getElementById("myModal").style.display = "flex";
-}
-
-function closeModal() {
-    document.getElementById("myModal").style.display = "none";
-    document.getElementById('roomNumber').value = '';
-   
-    let container = document.querySelector('.container');
-    container.classList.remove("shrink");
-    container.classList.add("expand");  // เพิ่ม animation expand
-
 }

@@ -10,25 +10,30 @@ body {
     align-items: center;
     height: 100vh;
 }
+.bounce {
+    animation: bounceInput 0.3s ease-in-out;
+}
+
 @keyframes expandPadding {
-    0% {
-        padding: 20px;
-    }
-    50% {
-        padding: 40px;
-    }
-    100% {
-        padding: 30px;
-    }
+    0% { padding: 20px; }
+    50% { padding: 45px; }
+    100% { padding: 35px; }
 }
 
 @keyframes shrinkPadding {
-    0% {
-        padding: 30px;
-    }
-    100% {
-        padding: 20px;
-    }
+    0% { padding: 35px; }
+    100% { padding: 45px; }
+    120% { padding: 55px; }
+}
+
+.container {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 350px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+    transition: padding 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .container.expand {
@@ -37,16 +42,6 @@ body {
 
 .container.shrink {
     animation: shrinkPadding 0.3s ease-in-out forwards;
-}
-
-
-.container {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 350px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .logo {
@@ -62,7 +57,7 @@ body {
 }
 
 input[type="text"] {
-    padding: 8px;
+    padding: 10px;
     background: #f5f5f5;
     width: 80%;
     border: 2px solid #f5f5f5;
@@ -70,11 +65,12 @@ input[type="text"] {
     outline: none;
     font-size: 14px;
     text-align: center;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 input[type="text"]:focus {
-    border-color: #7a7b7b;
-    box-shadow: 0 0 5px rgba(0, 91, 187, 0.5);
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 91, 187, 0.5);
 }
 
 button {
@@ -95,8 +91,8 @@ button {
 
 button:hover {
     background: linear-gradient(45deg, #0056b3, #003d80);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 button:active {
