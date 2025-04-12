@@ -172,9 +172,11 @@ function submitRoom() {
                     ${iconNextClean} <strong>Next Deep Clean:</strong> ${nextTimeDate} <br>
                     ${iconSoap} <strong>Lastest Deep Clean:</strong> ${deepCleanDate} <br>
                     ${iconNextClean} <strong>Next Filter Air:</strong> ${nextFilterAirDate} <br>
-                    ${iconAir} <strong>Lastest Filter Air:</strong> ${filterAirDate}<br>
-                    <br><em>🐾 Get to know Taotao, the cat that everyone falls in love with at first sight. Try clicking on Taotao !! .</em>
-                `;
+                    ${iconAir} <strong>Lastest Filter Air:</strong> ${filterAirDate} <br>
+                    <p style="margin-top: 10px;"><small><em>🐾 Come meet TaoTao, the super cute cat that everyone falls in love with at first sight. Just click TaoTao and you’ll see why everyone’s so smitten!</em></small></p>
+                    `;
+
+                
 
 
                     resultElement.style.color = "green";
