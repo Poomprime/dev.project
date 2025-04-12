@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("myModal");
     const roomInput = document.getElementById("roomNumber");
 
+    // ฟังก์ชันเมื่อกดปุ่ม OK
     modalOkBtn.addEventListener("click", () => {
         closeModal();
         userConfirmedOnce = true;
@@ -51,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 300);
     });
 
-    // ✅ คลิกพื้นที่ว่างเพื่อปิด Modal
+    // ปิด modal เมื่อคลิกพื้นที่ว่าง
     document.addEventListener("click", (event) => {
         if (modal.classList.contains("show") && event.target === modal) {
             closeModal();
@@ -64,23 +65,25 @@ document.addEventListener("DOMContentLoaded", () => {
             closeModal();
             return;
         }
-    
-        // Enter เพื่อ submit ห้อง (เฉพาะตอน modal ไม่เปิด)
+
+        // ปิด modal ด้วย Enter
+        if (event.key === "Enter" && modal.classList.contains("show")) {
+            closeModal();
+            return;
+        }
+
+        // Submit ห้องเมื่อกด Enter และ modal ยังไม่เปิด
         if (event.key === "Enter" && document.activeElement === roomInput && !modal.classList.contains("show")) {
             submitRoom();
             return;
         }
     });
-    
-    });
 
-
-// โหลดครั้งแรก
-window.addEventListener('DOMContentLoaded', () => {
-    const container = document.querySelector('.container');
+    // เรียกใช้แอนิเมชันเมื่อโหลดหน้า
     container.classList.add('animate-on-load');
 });
 
+// ฟังก์ชันแปลงเวลา
 function convertToBangkokTime(dateString) {
     if (!dateString || dateString === "No schedule available") {
         return "N/A";
@@ -88,6 +91,7 @@ function convertToBangkokTime(dateString) {
     return dateString.replace(/(\d{2})(\d{2})(\d{2})/, "$1/$2/20$3");
 }
 
+// ฟังก์ชันแสดง modal
 function showModal(message) {
     document.getElementById("modalMessage").innerHTML = message;
     let modal = document.getElementById("myModal");
@@ -97,6 +101,7 @@ function showModal(message) {
     }, 10);
 }
 
+// ฟังก์ชันปิด modal
 function closeModal() {
     let modal = document.getElementById("myModal");
     modal.classList.remove("show");
@@ -108,7 +113,7 @@ function closeModal() {
 
 document.querySelector("form")?.addEventListener("submit", e => e.preventDefault());
 
-
+// ฟังก์ชันสำหรับการ submit ห้อง
 function submitRoom() {
     if (isSearching) return; // ป้องกันการกดซ้ำ
 
@@ -140,7 +145,6 @@ function submitRoom() {
         submitBtn.disabled = true;
         submitBtn.innerText = "Searching...";  // 👈 เพิ่มบรรทัดนี้ก่อน fetch
 
-
         fetch("https://script.google.com/macros/s/AKfycbzWflHbJe1-yIrMJ7ZFooe1U56_h9IuYIAmmWxN1x-5nzJe56KJE_eQ_-cZmmB7oJNX2A/exec?room=" + encodeURIComponent(roomNumber))
             .then(response => response.json())
             .then(data => {
@@ -149,7 +153,6 @@ function submitRoom() {
                 loadingGif.style.display = "none";
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Submit";  // 👈 เพิ่มบรรทัดนี้หลังจาก fetch เสร็จ
-
 
                 container.classList.remove("expand", "shrink");
                 void container.offsetWidth;
