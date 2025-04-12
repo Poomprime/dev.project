@@ -1,9 +1,7 @@
-/* โค้ดเดิมทั้งหมดที่คุณให้มา */
-
 svg.icon {
     position: static;
-    width: 40px;
-    height: 40px;
+    width: 24px;
+    height: 24px;
     margin: auto;
     display: block;
   }
@@ -16,10 +14,9 @@ svg.icon {
     margin-top: 2px;
     color: black;
   }
-  
   .result-icon-text .icon {
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 16px;
     stroke: currentColor;
   }
   
@@ -43,11 +40,10 @@ svg.icon {
   .padding-anim {
     animation: expandPadding 0.2s ease-in-out forwards;
   }
-  
   @keyframes expandPadding {
     0% { padding: 25px; }
     50% { padding: auto; }
-    75% { padding: auto ; }
+    75% { padding: auto; }
     100% { padding: 40px; }
   }
   
@@ -57,7 +53,6 @@ svg.icon {
     120% { padding: 45px; }
   }
   
-  /* Container */
   .container {
     background: #ffffff !important;
     padding: 25px;
@@ -66,16 +61,12 @@ svg.icon {
     max-width: 350px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
     transition: padding 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  }
-  
-  .container {
     transition: transform 0.3s ease;
   }
   
   .expand {
     transform: scale(1.05);
   }
-  
   .shrink {
     transform: scale(0.95);
   }
@@ -86,7 +77,6 @@ svg.icon {
     max-width: 350px;
   }
   
-  /* Input Container */
   .input-container {
     display: flex;
     justify-content: center;
@@ -111,7 +101,6 @@ svg.icon {
     box-shadow: 0 0 8px rgba(0, 91, 187, 0.5);
   }
   
-  /* Button */
   button {
     font-family: 'Poppins', sans-serif;
     font-size: 20px;
@@ -142,7 +131,6 @@ svg.icon {
     letter-spacing: 2px;
   }
   
-  /* สถานะ loading */
   .onclic {
     width: 40px;
     border-color: #888888;
@@ -151,30 +139,25 @@ svg.icon {
     border-left-color: #e45726;
     animation: rotating 2s 0.25s linear infinite;
   }
-  
   .onclic::after {
     content: "";
   }
-  
   .onclic:hover {
     color: #e45726;
     background: white;
   }
   
-  /* validate */
   .validate {
     font-size: 13px;
     color: white;
     background: #e45726;
   }
-  
   .validate::after {
     font-family: 'Poppins';
     font-size: 13px;
     content: "\f00c";
   }
   
-  /* หมุน */
   @keyframes rotating {
     from {
       transform: rotate(0deg);
@@ -184,7 +167,6 @@ svg.icon {
     }
   }
   
-  /* Heading */
   h2 {
     font-weight: 600;
     font-size: 18px;
@@ -193,7 +175,6 @@ svg.icon {
     text-overflow: ellipsis;
   }
   
-  /* loading gif */
   .loading {
     display: none;
     width: auto;
@@ -201,13 +182,11 @@ svg.icon {
     margin: 0 auto;
   }
   
-  /* modal */
   #myModal {
     display: none;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
   }
-  
   #myModal.show {
     display: flex;
     opacity: 1;
@@ -225,7 +204,6 @@ svg.icon {
     justify-content: center;
     align-items: center;
   }
-  
   .modal-content {
     background: white;
     padding: 20px;
@@ -235,7 +213,6 @@ svg.icon {
     max-width: 300px;
   }
   
-  /* svg background */
   svg {
     position: fixed;
     top: 0;
@@ -244,7 +221,6 @@ svg.icon {
     height: 100vh;
   }
   
-  /* links (fixed bottom) */
   .links {
     position: fixed;
     bottom: 20px;
@@ -252,24 +228,20 @@ svg.icon {
     font-size: 18px;
     font-family: sans-serif;
   }
-  
   a {
     text-decoration: none;
     color: black;
     margin-left: 1em;
   }
-  
   a:hover {
     text-decoration: underline;
   }
-  
   a img.icon {
     display: inline-block;
     height: 1em;
     margin: 0 0 -0.1em 0.3em;
   }
   
-  /* svg icon */
   .icon {
     width: 1em;
     height: 1em;
@@ -279,49 +251,35 @@ svg.icon {
     stroke: currentColor;
   }
   
-  
-  /* เพิ่มส่วนของ media query สำหรับมือถือ */
-  
+  /* ปรับขนาดเพิ่มเติมสำหรับมือถือ */
   @media (max-width: 767px) {
-    /* ลดขนาด icon และ margin ให้เหมาะสม */
-    .svg.icon {
-      width: 30px;
-      height: 30px;
+    svg.icon {
+      width: 20px;
+      height: 20px;
     }
   
-    /* ปรับขนาด input และ button ให้เหมาะสม */
-    .input-container input[type="text"] {
-      width: 70%;
-      font-size: 14px;
+    .result-icon-text .icon {
+      width: 14px;
+      height: 14px;
     }
   
     button {
       width: 100px;
       font-size: 11px;
-      height: 35px;
     }
   
     .container {
-      padding: 20px;
-      width: 85%;
-      max-width: 300px;
-    }
-  
-    .links {
-      font-size: 14px;
-    }
-  
-    /* ปรับขนาดของ modal */
-    .modal-content {
-      width: 90%;
-      max-width: 280px;
       padding: 15px;
+      max-width: 90%;
     }
   
-    /* ลดขนาด svg icon ในผลลัพธ์ */
-    .result-icon-text .icon {
-      width: 20px;
-      height: 20px;
+    input[type="text"] {
+      font-size: 12px;
+      padding: 8px;
+    }
+  
+    h2 {
+      font-size: 16px;
     }
   }
   
