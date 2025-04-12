@@ -168,12 +168,14 @@ function submitRoom() {
                     let nextFilterAirDate = convertToBangkokTime(data.next_filter_air);
 
                     resultElement.innerHTML = `
-                        ${iconRoom} <strong>Room:</strong> ${roomNumber} <br>
-                        ${iconNextClean} <strong>Next Deep Clean:</strong> ${nextTimeDate} <br>
-                        ${iconSoap} <strong>Lastest Deep Clean:</strong> ${deepCleanDate} <br>
-                        ${iconNextClean} <strong>Next Filter Air:</strong> ${nextFilterAirDate} <br>
-                        ${iconAir} <strong>Lastest Filter Air:</strong> ${filterAirDate}
-                    `;
+                    ${iconRoom} <strong>Room:</strong> ${roomNumber} <br>
+                    ${iconNextClean} <strong>Next Deep Clean:</strong> ${nextTimeDate} <br>
+                    ${iconSoap} <strong>Lastest Deep Clean:</strong> ${deepCleanDate} <br>
+                    ${iconNextClean} <strong>Next Filter Air:</strong> ${nextFilterAirDate} <br>
+                    ${iconAir} <strong>Lastest Filter Air:</strong> ${filterAirDate}<br>
+                    <br><em>🐾 Get to know Taotao, the cat that everyone falls in love with at first sight. Try clicking on Taotao !! .</em>
+                `;
+
 
                     resultElement.style.color = "green";
                     showModal(resultElement.innerHTML);
