@@ -32,6 +32,8 @@ let userConfirmedOnce = false;
 document.addEventListener("DOMContentLoaded", () => {
     const modalOkBtn = document.getElementById("modalOkBtn");
     const container = document.querySelector(".container");
+    const modal = document.getElementById("myModal");
+    const roomInput = document.getElementById("roomNumber");
 
     modalOkBtn.addEventListener("click", () => {
         closeModal();
@@ -47,7 +49,30 @@ document.addEventListener("DOMContentLoaded", () => {
             container.classList.add("expand");
         }, 300);
     });
-});
+
+    // ✅ คลิกพื้นที่ว่างเพื่อปิด Modal
+    document.addEventListener("click", (event) => {
+        if (modal.classList.contains("show") && event.target === modal) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        // ปิด modal ด้วย ESC
+        if (event.key === "Escape" && modal.classList.contains("show")) {
+            closeModal();
+            return;
+        }
+    
+        // Enter เพื่อ submit ห้อง (เฉพาะตอน modal ไม่เปิด)
+        if (event.key === "Enter" && document.activeElement === roomInput && !modal.classList.contains("show")) {
+            submitRoom();
+            return;
+        }
+    });
+    
+    });
+
 
 // โหลดครั้งแรก
 window.addEventListener('DOMContentLoaded', () => {
@@ -76,8 +101,13 @@ function closeModal() {
     modal.classList.remove("show");
     setTimeout(() => {
         modal.style.display = "none";
+        document.getElementById("roomNumber").focus(); // 👈 focus คืน
     }, 300);
 }
+
+document.querySelector("form")?.addEventListener("submit", e => e.preventDefault());
+
+
 function submitRoom() {
     let roomNumber = document.getElementById('roomNumber').value.trim().toUpperCase();
     let pattern = /^[ABC]\d{3}$/;
