@@ -14,28 +14,44 @@
     <link rel="stylesheet" href="styles.css">
 
     <!-- ลิงก์ไฟล์ JavaScript -->
+    <script>
+      const iconTest = `
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none"
+          viewBox="0 0 24 24" stroke-width="1.5" stroke="black">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M12 6v6l4 2m8 4.5A10.5 10.5 0 111.5 12" />
+      </svg>`;
+      document.getElementById("result").innerHTML = iconTest + " Test Icon";
+    </script>
+    
     <script src="script.js"></script>
 
 </head>
 <body>
-    <div class="container">
-        <img class="logo" src="Navlogo.png" alt="logo">
-        <h2>Air-conditioner Schedule Lookup</h2>
-        <div class="input-container">
-            <input type="text" id="roomNumber" placeholder="e.g., B104, b109">
-        </div>
-        <button id="submitBtn" onclick="submitRoom()">Submit</button>
-        <img id="loadingGif" class="loading" src="loading.gif" alt="Loading...">
-        <p id="result"></p>
+    <div class="container animate-on-load">
+      <img class="logo" src="Navlogo.png" alt="logo">
+      <h2>Air-conditioner Schedule Lookup</h2>
+      <div class="input-container">
+        <input type="text" id="roomNumber" placeholder="e.g., B104, b109">
+      </div>
+  
+      <!-- กล่อง animation -->
+      <div class="box"></div>
+  
+      <button id="submitBtn" onclick="submitRoom()">Submit</button>
+      <img id="loadingGif" class="loading" src="loading.gif" alt="Loading...">
+      <p id="result"></p>
     </div>
-
     <div id="myModal" class="modal">
-        <div class="modal-content">
-            <p id="modalMessage"></p>
-            <button onclick="closeModal()">OK</button>
-        </div>
+      <div class="modal-content">
+        <span id="modalMessage"></span>
+        <button id="modalOkBtn">OK</button>
+      </div>
     </div>
+    
 
-    <script src="script.js"></script>
-</body>
+
+    </div>
+  </body>
+  
 </html>
