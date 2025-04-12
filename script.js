@@ -28,6 +28,7 @@ const iconAir = `
 
 // ✅ flag ว่าผู้ใช้กด OK มาแล้ว
 let userConfirmedOnce = false;
+let isSearching = false;
 
 document.addEventListener("DOMContentLoaded", () => {
     const modalOkBtn = document.getElementById("modalOkBtn");
@@ -109,6 +110,8 @@ document.querySelector("form")?.addEventListener("submit", e => e.preventDefault
 
 
 function submitRoom() {
+    if (isSearching) return; // ป้องกันการกดซ้ำ
+
     let roomNumber = document.getElementById('roomNumber').value.trim().toUpperCase();
     let pattern = /^[ABC]\d{3}$/;
     let resultElement = document.getElementById('result');
@@ -120,6 +123,8 @@ function submitRoom() {
     void container.offsetWidth;
 
     if (pattern.test(roomNumber)) {
+        isSearching = true; // ✅ ตั้ง flag
+
         resultElement.innerText = "Searching...";
         resultElement.style.color = "blue";
         loadingGif.style.display = "block";
@@ -133,12 +138,18 @@ function submitRoom() {
         }
 
         submitBtn.disabled = true;
+        submitBtn.innerText = "Searching...";  // 👈 เพิ่มบรรทัดนี้ก่อน fetch
+
 
         fetch("https://script.google.com/macros/s/AKfycbzWflHbJe1-yIrMJ7ZFooe1U56_h9IuYIAmmWxN1x-5nzJe56KJE_eQ_-cZmmB7oJNX2A/exec?room=" + encodeURIComponent(roomNumber))
             .then(response => response.json())
             .then(data => {
+                isSearching = false; // ✅ รีเซ็ต flag
+
                 loadingGif.style.display = "none";
                 submitBtn.disabled = false;
+                submitBtn.innerText = "Submit";  // 👈 เพิ่มบรรทัดนี้หลังจาก fetch เสร็จ
+
 
                 container.classList.remove("expand", "shrink");
                 void container.offsetWidth;
@@ -170,11 +181,14 @@ function submitRoom() {
                 }
             })
             .catch(() => {
+                isSearching = false; // ✅ รีเซ็ต flag
+
                 resultElement.innerText = "❌ An error occurred.";
                 resultElement.style.color = "red";
                 showModal("❌ Please try again.");
                 loadingGif.style.display = "none";
                 submitBtn.disabled = false;
+                submitBtn.innerText = "Submit";  // 👈 เพิ่มบรรทัดนี้หลังจาก fetch เสร็จ
 
                 container.classList.remove("expand", "shrink");
                 void container.offsetWidth;

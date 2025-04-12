@@ -156,6 +156,11 @@ svg.icon {
     font-family: 'Poppins';
     font-size: 13px;
     content: "\f00c";
+
+  }
+  #submitBtn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
   }
   
   @keyframes rotating {
