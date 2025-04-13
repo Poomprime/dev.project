@@ -173,8 +173,15 @@ function submitRoom() {
                     ${iconSoap} <strong>Lastest Deep Clean:</strong> ${deepCleanDate} <br>
                     ${iconNextClean} <strong>Next Filter Air:</strong> ${nextFilterAirDate} <br>
                     ${iconAir} <strong>Lastest Filter Air:</strong> ${filterAirDate} <br>
-                    <p style="margin-top: 10px;"><small><em>🐾 Come meet TaoTao, the super cute cat that everyone falls in love with at first sight. Just click TaoTao and you’ll see why everyone’s so smitten!</em></small></p>
-                    `;
+                    <p style="margin-top: 10px;">
+                        <small>
+                            <em>🐾 Come meet TaoTao, the super cute cat that everyone falls in love with at first sight. 
+                           <a href="https://www.instagram.com/p/DF6tlZqPay5/?img_index=1" style="color: blue; text-decoration: underline; font-weight: bold;">just click</a>
+                        TaoTao and you’ll see why everyone’s so smitten!</em>
+                        </small>
+                    </p>
+                `;
+                
 
                 
 
