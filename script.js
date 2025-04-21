@@ -167,21 +167,21 @@ function submitRoom() {
                     let nextTimeDate = convertToBangkokTime(data.next_deepclean);
                     let nextFilterAirDate = convertToBangkokTime(data.next_filter_air);
 
+                    
                     resultElement.innerHTML = `
                     ${iconRoom} <strong>Room:</strong> ${roomNumber} <br>
                     ${iconNextClean} <strong>Next Deep Clean:</strong> ${nextTimeDate} <br>
-                    ${iconSoap} <strong>Lastest Deep Clean:</strong> ${deepCleanDate} <br>
-                    ${iconNextClean} <strong>Next Filter Air:</strong> ${nextFilterAirDate} <br>
-                    ${iconAir} <strong>Lastest Filter Air:</strong> ${filterAirDate} <br>
+                    ${iconSoap} <strong>Latest Deep Clean:</strong> ${deepCleanDate} <br>
+                    ${iconNextClean} <strong>Next Air Filter Clean:</strong> ${nextFilterAirDate} <br>
+                    ${iconAir} <strong>Latest Air Filter Clean:</strong> ${filterAirDate} <br>
                     <p style="margin-top: 10px;">
                         <small>
                             <em>🐾 Come meet TaoTao, the super cute cat that everyone falls in love with at first sight. 
-                           <a href="https://www.instagram.com/p/DF6tlZqPay5/?img_index=1" style="color: blue; text-decoration: underline; font-weight: bold;">just click</a>
+                           <a href="https://www.instagram.com/p/DF6tlZqPay5/?img_index=1" style="color: blue; text-decoration: underline; font-weight: bold;"> click</a>
                         TaoTao and you’ll see why everyone’s so smitten!</em>
                         </small>
                     </p>
                 `;
-                
 
                 
 
