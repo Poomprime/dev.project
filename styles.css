@@ -179,6 +179,13 @@ svg.icon {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  }
+  h5,h6 {
+  
+      font-size: 0.5vw;
+      color: gray;
+      line-height: 0.2; /* ลดช่องว่างระหว่างบรรทัด */
+    }
   
   .loading {
     display: none;
