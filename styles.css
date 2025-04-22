@@ -284,9 +284,12 @@ svg.icon {
       padding: 15px;
       max-width: 90%;
     }
-  
+    body {
+      height: 100dvh; /* ใช้ dynamic viewport height ที่รองรับ keyboard บนมือถือ */
+    }
+    
     input[type="text"] {
-      font-size: 12px;
+      font-size: 16px;
       padding: 8px;
     }
   

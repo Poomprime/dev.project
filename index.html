@@ -15,13 +15,10 @@
 
     <!-- ลิงก์ไฟล์ JavaScript -->
     <script>
-      const iconTest = `
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none"
-          viewBox="0 0 24 24" stroke-width="1.5" stroke="black">
-        <path stroke-linecap="round" stroke-linejoin="round"
-          d="M12 6v6l4 2m8 4.5A10.5 10.5 0 111.5 12" />
-      </svg>`;
-      document.getElementById("result").innerHTML = iconTest + " Test Icon";
+      document.querySelector('input[type="text"]').addEventListener('focus', function () {
+    setTimeout(() => {
+      this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300); });
     </script>
     
     <script src="script.js"></script>
