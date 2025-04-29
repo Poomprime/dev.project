@@ -1,30 +1,35 @@
-const iconRoom = `
-<svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none"
-    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round"
-    d="M3 12l2-2m0 0l7-7 7 7m-9 14v-6h4v6m5-18h3a1 1 0 011 1v16a1 1 0 01-1 1h-3M4 21h3a1 1 0 001-1v-6H4v6a1 1 0 001 1z" />
-</svg>`;
+// const iconRoom = `
+// <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none"
+//     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+//   <path stroke-linecap="round" stroke-linejoin="round"
+//     d="M3 12l2-2m0 0l7-7 7 7m-9 14v-6h4v6m5-18h3a1 1 0 011 1v16a1 1 0 01-1 1h-3M4 21h3a1 1 0 001-1v-6H4v6a1 1 0 001 1z" />
+// </svg>`;
 
-const iconNextClean = `
-<svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none"
-    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round"
-    d="M12 6v6l4 2m8 4.5A10.5 10.5 0 111.5 12" />
-</svg>`;
+// const iconNextClean = `
+// <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none"
+//     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+//   <path stroke-linecap="round" stroke-linejoin="round"
+//     d="M12 6v6l4 2m8 4.5A10.5 10.5 0 111.5 12" />
+// </svg>`;
 
-const iconSoap = `
-<svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none"
-    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round"
-    d="M9 12h6m-6 4h6m-7.5 4h9a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0016.5 4.5h-9A2.25 2.25 0 005.25 6.75v11.25A2.25 2.25 0 007.5 20.25z" />
-</svg>`;
+// const iconSoap = `
+// <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none"
+//     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+//   <path stroke-linecap="round" stroke-linejoin="round"
+//     d="M9 12h6m-6 4h6m-7.5 4h9a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0016.5 4.5h-9A2.25 2.25 0 005.25 6.75v11.25A2.25 2.25 0 007.5 20.25z" />
+// </svg>`;
 
-const iconAir = `
-<svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none"
-    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round"
-    d="M3.75 15.75a3 3 0 106.01.51M6 9.75h12m-12-4.5h12M6 14.25h8.25" />
-</svg>`;
+// const iconAir = `
+// <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none"
+//     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+//   <path stroke-linecap="round" stroke-linejoin="round"
+//     d="M3.75 15.75a3 3 0 106.01.51M6 9.75h12m-12-4.5h12M6 14.25h8.25" />
+// </svg>`;
+
+const iconRoom = `<img src="hotel.png" class="icon" alt="Room">`;
+const iconNextClean = `<img src="calendar.png" class="icon" alt="Next Clean">`;
+const iconSoap = `<img src="air-conditioning.png" class="icon" alt="Soap">`;
+const iconAir = `<img src="air-conditioner.png" class="icon" alt="Air Filter">`;
 
 // ✅ flag ว่าผู้ใช้กด OK มาแล้ว
 let userConfirmedOnce = false;
