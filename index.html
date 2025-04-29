@@ -1,59 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room Lookup</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Room Lookup</title>
 
-    <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 
-    <!-- ลิงก์ไฟล์ JavaScript -->
-    <script>
-      document.querySelector('input[type="text"]').addEventListener('focus', function () {
-    setTimeout(() => {
-      this.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 300); });
-    </script>
-    
-    <script src="script.js"></script>
-
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
 </head>
+
 <body>
   <div class="container animate-on-load">
     <a href="https://www.instagram.com/p/DF6tlZqPay5/?img_index=1">
       <img class="logo" src="Navlogo.png" alt="logo">
     </a>
-  
-      <h2>Air-conditioner Schedule Lookup</h2>
-      <h5 >If your room has more than one air conditioners</h5>
-      <h6> our engineer will clean them all at the same time.</h6>
-      <div class="input-container">
-        <input type="text" id="roomNumber" placeholder="e.g., B104, b104">
-      </div>
-  
-      <!-- กล่อง animation -->
-      <div class="box"></div>
-  
-      <button id="submitBtn" onclick="submitRoom()">Submit</button>
-      <img id="loadingGif" class="loading" src="loading.gif" alt="Loading...">
-      <p id="result"></p>
+
+    <h2>Air-conditioner Schedule Lookup</h2>
+    <h5>If your room has more than one air conditioner</h5>
+    <h6>Our engineer will clean them all at the same time.</h6>
+
+    <div class="input-container">
+      <input type="text" id="roomNumber" placeholder="e.g., B104, b104">
     </div>
-    <div id="myModal" class="modal">
-      <div class="modal-content">
-        <span id="modalMessage"></span>
-        <button id="modalOkBtn">OK</button>
-      </div>
+
+    <div class="box"></div>
+
+    <button id="submitBtn" onclick="submitRoom()">Submit</button>
+    <img id="loadingGif" class="loading" src="loading.gif" alt="Loading..." style="display: none;">
+    <p id="result"></p>
+  </div>
+
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span id="modalMessage"></span>
+      <button id="modalOkBtn">OK</button>
     </div>
-    
+  </div>
+
+  <!-- สคริปต์ ควรมาไว้ท้าย body -->
+  <script src="script.js"></script>
+
+  
+  <!-- Focus และ scroll เมื่อกดที่ input -->
 
 
-    </div>
-  </body>
-  
+</body>
 </html>

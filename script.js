@@ -29,6 +29,7 @@ const iconAir = `
 // ✅ flag ว่าผู้ใช้กด OK มาแล้ว
 let userConfirmedOnce = false;
 let isSearching = false;
+let isSpecialRoom = false;  
 
 document.addEventListener("DOMContentLoaded", () => {
     const modalOkBtn = document.getElementById("modalOkBtn");
@@ -112,8 +113,162 @@ function closeModal() {
 }
 
 document.querySelector("form")?.addEventListener("submit", e => e.preventDefault());
+// ฟังก์ชันเมื่อเลือกห้องจาก Special Rooms
 
+
+function selectSpecialRoom(room) {
+    // ปิด modal
+    closeModal();
+
+    // ใส่ข้อมูลห้องที่เลือกเข้าไปใน input
+    document.getElementById('roomNumber').value = room;
+
+    // ตั้งค่า flag ว่าเป็นห้องจาก Special Rooms
+    isSpecialRoom = true;
+
+    // เรียกฟังก์ชัน submitRoom เพื่อทำการค้นหาห้อง
+    submitRoom();
+}
+
+
+// ฟังก์ชันที่แสดง modal สำหรับ Special Rooms
+// ฟังก์ชันที่แสดง modal สำหรับ Special Rooms
+function showSpecialRoomOptions() {
+    const specialRooms = [
+        "Co Working 3 ตัวในสุด", "Co Working 1 ตัวแรก", "Co Working 2 ตัวกลาง", "Fitness 1-หน้าประตู",
+        "Server Room", "Fitness 2", "Fitness 3", "Garbage Room", "Game Room", "Kid's Club",
+        "Reservation", "VIVA 1 ประตูเข้า", "VIVA 2 Bar", "VIVA 3 Counter", "VIVA 4",
+        "VIVA 5 Salad Bar", "Sale Office", "Front Office", "Exe. Office GM", "Exe. Office FC",
+        "HK OFFICE", "Canteen", "FC Office", "Meeting Room", "Marketing", "VIVA Wine",
+        "Eng Office", "HR Dir. Room"
+    ];
+
+    let optionsHtml = `
+        <h3 style="margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid #ddd;">เลือกพื้นที่ที่ต้องการ:</h3>
+        <div style="max-height: 400px; overflow-y: auto; padding-right: 10px; margin-bottom: 15px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; padding: 5px;">`;
+
+    specialRooms.forEach(room => {
+        optionsHtml += `
+            <div style="padding: 5px;">
+                <button style="width: 100%; padding: 10px; cursor: pointer; border-radius: 8px; 
+                background-color: #f5f5f5; border: 1px solid #ddd; transition: all 0.3s ease;
+                font-size: 14px; text-align: left; overflow: hidden; text-overflow: ellipsis;"
+                onmouseover="this.style.backgroundColor='#e0e0e0'"
+                onmouseout="this.style.backgroundColor='#f5f5f5'"
+                onclick="selectSpecialRoom('${room}')">${room}</button>
+            </div>`;
+    });
+
+    optionsHtml += `
+            </div>
+        </div>
+        <div style="text-align: center; padding-top: 10px;">
+            <button style="padding: 8px 20px; cursor: pointer; background-color: #f44336; color: white; 
+            border: none; border-radius: 4px;" onclick="closeModal()">ยกเลิก</button>
+        </div>`;
+
+    // ปรับขนาด modal ให้เหมาะสม
+    const modal = document.getElementById("myModal");
+    const modalContent = modal.querySelector(".modal-content");
+    
+    if (modalContent) {
+        modalContent.style.maxWidth = "700px";
+        modalContent.style.padding = "20px";
+        modalContent.style.borderRadius = "12px";
+    }
+
+    showModal(optionsHtml);
+fodal(optionsHtml);
+}
+
+// เพิ่มฟังก์ชัน searchRoom
+function searchRoom(roomNumber) {
+    let resultElement = document.getElementById('result');
+    let submitBtn = document.getElementById('submitBtn');
+    let loadingGif = document.getElementById('loadingGif');
+    let container = document.querySelector('.container');
+
+    isSearching = true; // ตั้ง flag
+
+    resultElement.innerText = "Searching...";
+    resultElement.style.color = "blue";
+    loadingGif.style.display = "block";
+    container.classList.add("shrink");
+
+    // เพิ่ม padding animation ถ้าเคยกด OK
+    if (userConfirmedOnce) {
+        container.classList.remove("padding-anim");
+        void container.offsetWidth; // รีเฟรชการแสดงผล
+        container.classList.add("padding-anim"); // เพิ่มแอนิเมชัน
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Searching...";
+
+    fetch("https://script.google.com/macros/s/AKfycbzWflHbJe1-yIrMJ7ZFooe1U56_h9IuYIAmmWxN1x-5nzJe56KJE_eQ_-cZmmB7oJNX2A/exec?room=" + encodeURIComponent(roomNumber))
+        .then(response => response.json())
+        .then(data => {
+            isSearching = false; // รีเซ็ต flag
+
+            loadingGif.style.display = "none";
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Submit";
+
+            container.classList.remove("expand", "shrink");
+            void container.offsetWidth;
+            container.classList.add("shrink");
+
+            // รีเซ็ต userConfirmedOnce หลังจากค้นหาสำเร็จ
+            userConfirmedOnce = false;
+
+            if (data.room) {
+                let deepCleanDate = convertToBangkokTime(data.deep_clean);
+                let filterAirDate = convertToBangkokTime(data.filter_air);
+                let nextTimeDate = convertToBangkokTime(data.next_deepclean);
+                let nextFilterAirDate = convertToBangkokTime(data.next_filter_air);
+                
+                resultElement.innerHTML = `
+                ${iconRoom} <strong>Room:</strong> ${roomNumber} <br>
+                ${iconNextClean} <strong>Next Deep Clean:</strong> ${nextTimeDate} <br>
+                ${iconSoap} <strong>Latest Deep Clean:</strong> ${deepCleanDate} <br>
+                ${iconNextClean} <strong>Next Air Filter Clean:</strong> ${nextFilterAirDate} <br>
+                ${iconAir} <strong>Latest Air Filter Clean:</strong> ${filterAirDate} <br>
+                <p style="margin-top: 10px;">
+                    <small>
+                        <em>🐾 Come meet TaoTao, the super cute cat that everyone falls in love with at first sight. 
+                       <a href="https://www.instagram.com/p/DF6tlZqPay5/?img_index=1" style="color: blue; text-decoration: underline; font-weight: bold;"> click</a>
+                    TaoTao and you'll see why everyone's so smitten!</em>
+                    </small>
+                </p>
+            `;
+                
+                resultElement.style.color = "green";
+                showModal(resultElement.innerHTML);
+            } else if (data.error) {
+                resultElement.innerText = data.error;
+                resultElement.style.color = "red";
+                showModal("❌ " + data.error);
+            }
+        })
+        .catch(() => {
+            isSearching = false; // รีเซ็ต flag
+
+            resultElement.innerText = "❌ An error occurred.";
+            resultElement.style.color = "red";
+            showModal("❌ Please try again.");
+            loadingGif.style.display = "none";
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Submit";
+
+            container.classList.remove("expand", "shrink");
+            void container.offsetWidth;
+            container.classList.add("shrink");
+        });
+}
 // ฟังก์ชันสำหรับการ submit ห้อง
+/* The `submitRoom()` function in the provided JavaScript code is responsible for handling the
+submission of a room number input by the user. Here is a breakdown of what the function does: */
 function submitRoom() {
     if (isSearching) return; // ป้องกันการกดซ้ำ
 
@@ -126,7 +281,21 @@ function submitRoom() {
 
     container.classList.remove("expand", "shrink");
     void container.offsetWidth;
-
+    
+    // ตรวจสอบว่าเป็น ## หรือไม่ก่อนตรวจสอบ pattern
+    if (roomNumber === "##") {
+        showSpecialRoomOptions();
+        return;
+    }
+    
+    // ถ้าเลือกห้องจาก Special Rooms ข้ามการตรวจสอบรูปแบบ
+    if (isSpecialRoom) {
+        // รีเซ็ต flag หลังจากการเลือกห้องจาก Special Rooms
+        isSpecialRoom = false;
+        searchRoom(roomNumber);  // เรียกฟังก์ชัน searchRoom โดยไม่ตรวจสอบรูปแบบ
+        return;
+    }
+    
     if (pattern.test(roomNumber)) {
         isSearching = true; // ✅ ตั้ง flag
 
@@ -178,7 +347,7 @@ function submitRoom() {
                         <small>
                             <em>🐾 Come meet TaoTao, the super cute cat that everyone falls in love with at first sight. 
                            <a href="https://www.instagram.com/p/DF6tlZqPay5/?img_index=1" style="color: blue; text-decoration: underline; font-weight: bold;"> click</a>
-                        TaoTao and you’ll see why everyone’s so smitten!</em>
+                        TaoTao and you'll see why everyone's so smitten!</em>
                         </small>
                     </p>
                 `;
